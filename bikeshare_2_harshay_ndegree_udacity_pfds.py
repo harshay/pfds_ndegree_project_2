@@ -168,6 +168,30 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def display_selected_data(df):
+
+    counter = 0
+    upper_lim = 4
+
+    while True:
+
+        if counter == 0:
+            see_data_flg = input(" Do you want to see the first 5 rows of the selected data? Type 'yes' to see or 'no' to exit ").lower().strip()
+        else:
+            see_data_flg = input(" Do you want to see the next 5 rows of the selected data? Type 'yes' to see or 'no' to exit ").lower().strip()
+
+        if see_data_flg == 'yes':
+            while counter <= upper_lim:
+                print(df.loc[[counter]])
+                counter = counter + 1
+
+        upper_lim = upper_lim + 5
+
+        if see_data_flg == 'no':
+            break
+
+        if see_data_flg not in ['yes','no']:
+            print('Invalid Input : please enter yes to see the data or no to exit')
 
 def main():
     while True:
@@ -175,9 +199,11 @@ def main():
         df = load_data(city, month, day)
 
         time_stats(df)
+
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        display_selected_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
