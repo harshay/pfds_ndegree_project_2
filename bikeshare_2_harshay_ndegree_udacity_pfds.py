@@ -170,6 +170,7 @@ def user_stats(df):
 
 def display_selected_data(df):
 
+    #set row limits
     counter = 0
     upper_lim = 4
 
